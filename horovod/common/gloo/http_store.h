@@ -45,7 +45,7 @@ public:
   std::vector<char> get(const std::string& key) override;
 
   void wait(const std::vector<std::string>& keys) override {
-    wait(keys, Store::kDefaultTimeout);
+    wait(keys, gloo::rendezvous::Store::kDefaultTimeout);
   }
 
   void wait(const std::vector<std::string>& keys,
