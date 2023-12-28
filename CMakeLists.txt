@@ -16,11 +16,7 @@ endif()
 
 project(horovod CXX)
 
-if(NOT Pytorch_VERSION VERSION_LESS "2.1.0")
-    set(CMAKE_CXX_STANDARD 17)
-else()
-    set(CMAKE_CXX_STANDARD 14)
-endif()
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -354,6 +350,10 @@ add_subdirectory(horovod/tensorflow)
 add_subdirectory(horovod/torch)
 #MXNet
 add_subdirectory(horovod/mxnet)
+
+if(NOT Pytorch_VERSION VERSION_LESS "2.1.0")
+    set(CMAKE_CXX_STANDARD 17)
+endif()
 
 # Correctly wrap up json format
 file(APPEND "${CMAKE_LIBRARY_OUTPUT_DIRECTORY_ROOT}/metadata.json" "\"dummy\": \"none\"\n}")
