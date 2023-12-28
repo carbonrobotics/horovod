@@ -16,7 +16,7 @@ endif()
 
 project(horovod CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -373,11 +373,6 @@ if(HAVE_GLOO AND ((DEFINED Tensorflow_CXX11 AND NOT Tensorflow_CXX11) OR (DEFINE
     add_subdirectory(third_party/compatible_gloo)
     target_compile_definitions(compatible_gloo PRIVATE _GLIBCXX_USE_CXX11_ABI=0)
 endif()
-
-file(READ ${PROJECT_SOURCE_DIR}/third_party/gloo/CMakeLists.txt GLOO_CMAKE)
-string(REPLACE "-std=c++11" "-std=c++17" GLOO_CMAKE "${GLOO_CMAKE}")
-string(PREPEND GLOO_CMAKE "set(CMAKE_CXX_STANDARD 17)\n")
-file(WRITE ${PROJECT_SOURCE_DIR}/third_party/gloo/CMakeLists.txt "${GLOO_CMAKE}")
 
 # Gloo for c++17 TF
 if(HAVE_GLOO AND (DEFINED Tensorflow_CXX17 AND Tensorflow_CXX17))
